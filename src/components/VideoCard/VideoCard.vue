@@ -76,7 +76,6 @@ const isHover = ref<boolean>(false)
 const mouseEnterTimeOut = ref()
 const mouseLeaveTimeOut = ref()
 const previewVideoUrl = ref<string>('')
-const contentVisibility = ref<'auto' | 'visible'>('auto')
 const videoElement = ref<HTMLVideoElement | null>(null)
 
 watch(() => isHover.value, async (newValue) => {
@@ -141,8 +140,6 @@ function toggleWatchLater() {
 function handleMouseEnter() {
   props.video && setActivatedCover(`${removeHttpFromUrl(props.video.cover)}@672w_378h_1c_!web-home-common-cover`)
 
-  // fix #789
-  contentVisibility.value = 'visible'
   if (settings.value.hoverVideoCardDelayed) {
     mouseEnterTimeOut.value = setTimeout(() => {
       isHover.value = true
@@ -158,7 +155,6 @@ function handleMouseEnter() {
 }
 
 function handelMouseLeave() {
-  contentVisibility.value = 'auto'
   isHover.value = false
   clearTimeout(mouseEnterTimeOut.value)
   clearTimeout(mouseLeaveTimeOut.value)
@@ -272,7 +268,7 @@ provide('getVideoType', () => props.type!)
 
 <template>
   <div
-    :style="{ contentVisibility }"
+    content-visibility="auto"
     intrinsic-size-300px
     duration-300 ease-in-out
     rounded="$bew-radius"
