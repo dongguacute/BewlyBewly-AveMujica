@@ -379,7 +379,7 @@ provide('getVideoType', () => props.type!)
                 z="2"
                 p="x-2 y-1"
                 m="1"
-                rounded="$bew-radius"
+                rounded="$bew-radius-half"
                 text="!white xs"
                 bg="black opacity-60"
                 class="group-hover:opacity-0"
@@ -402,7 +402,7 @@ provide('getVideoType', () => props.type!)
                 v-if="video.liveStatus === 1"
                 class="group-hover:opacity-0"
                 pos="absolute left-0 top-0" bg="$bew-theme-color" text="xs white" fw-bold
-                p="x-2 y-1" m-1 inline-block rounded="$bew-radius" duration-300
+                p="x-2 y-1" m-1 inline-block rounded="$bew-radius-half" duration-300
               >
                 LIVE
                 <i i-svg-spinners:pulse-3 align-middle mt--0.2em />
@@ -416,7 +416,7 @@ provide('getVideoType', () => props.type!)
                   color: video.badge.color,
                 }"
                 pos="absolute right-0 top-0" bg="$bew-theme-color" text="xs white"
-                p="x-2 y-1" m-1 inline-block rounded="$bew-radius" duration-300
+                p="x-2 y-1" m-1 inline-block rounded="$bew-radius-half" duration-300
               >
                 {{ video.badge.text }}
               </div>
@@ -426,7 +426,7 @@ provide('getVideoType', () => props.type!)
                 v-if="showWatcherLater"
                 pos="absolute top-0 right-0" z="2"
                 p="x-2 y-1" m="1"
-                rounded="$bew-radius"
+                rounded="$bew-radius-half"
                 text="!white xl"
                 bg="black opacity-60"
                 class="opacity-0 group-hover/cover:opacity-100"

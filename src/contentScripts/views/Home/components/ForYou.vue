@@ -355,6 +355,10 @@ async function getRecommendVideos() {
         if (item.goto === 'ad')
           return
 
+        // 直播卡片没有 owner/stat 字段，无法用 VideoCard 渲染，静默跳过
+        if (item.goto === 'live')
+          return
+
         // 过滤掉缺少必要字段的数据（owner 或 stat 为 null）
         if (!item.owner || !item.stat) {
           console.warn('[ForYou] Filtered out item with null owner or stat:', item.id, item.goto)

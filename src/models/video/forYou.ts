@@ -51,6 +51,7 @@ export interface Item {
 export enum Goto {
   AV = 'av',
   AD = 'ad', // 广告卡片
+  LIVE = 'live', // 直播卡片，owner/stat 为 null
 }
 
 export interface Owner {
