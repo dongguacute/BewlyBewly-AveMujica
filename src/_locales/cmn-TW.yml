@@ -212,6 +212,8 @@ settings:
   style_auto_follow_bg: 自動
   style_force_enable: 開啓
   style_force_disable: 關閉
+  rounded_video_player: 影片播放器圓角
+  rounded_video_player_desc: 為影片播放器新增類似 YouTube 的圓角。
   legacy_player_loading_screen: 使用舊版播放器載入畫面（抖動小電視）
 
   # Search page

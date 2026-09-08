@@ -322,4 +322,12 @@ export function setupNecessarySettingsWatchers() {
     else
       hideSearchHistoryStyleEl.remove()
   }, { immediate: true })
+
+  watch(
+    () => settings.value.roundedVideoPlayer,
+    () => {
+      document.documentElement.classList.toggle('rounded-video-player', settings.value.roundedVideoPlayer)
+    },
+    { immediate: true },
+  )
 }

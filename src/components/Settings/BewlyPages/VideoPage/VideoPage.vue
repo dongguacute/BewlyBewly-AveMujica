@@ -91,6 +91,11 @@ watch(() => settings.value.legacyPlayerLoadingScreen, () => {
         </div>
       </SettingsItem>
 
+      <!-- 控制视频播放器圆角的开关 -->
+      <SettingsItem :title="$t('settings.rounded_video_player')" :desc="$t('settings.rounded_video_player_desc')">
+        <Radio v-model="settings.roundedVideoPlayer" />
+      </SettingsItem>
+
       <SettingsItem :title="$t('settings.legacy_player_loading_screen')">
         <Radio v-model="settings.legacyPlayerLoadingScreen" />
       </SettingsItem>

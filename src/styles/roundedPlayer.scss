@@ -1,0 +1,16 @@
+// YouTube-like rounded corners for the bilibili video player
+html.rounded-video-player {
+  // 全屏和网页全屏时保持直角，避免四角露底
+  .player-wrap,
+  .bilibili-player-placeholder,
+  .bpx-player-container:not(:fullscreen):not([data-screen="full"]):not([data-screen="web"]) {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  // 占位层背景透明，否则圆角缺口处会露出它的白色方块角
+  .bilibili-player-placeholder,
+  .bilibili-player-placeholder-top {
+    background: transparent !important;
+  }
+}
