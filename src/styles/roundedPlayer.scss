@@ -11,6 +11,11 @@ html.rounded-video-player {
     overflow: hidden;
   }
 
+  // 底部弹幕框与页面背景同色（浅色模式下圆角轮廓看不出来），加阴影增强轮廓
+  .player-wrap {
+    box-shadow: 0 4px 20px rgb(0 0 0 / 14%);
+  }
+
   // 占位层背景透明，否则圆角缺口处会露出它的白色方块角
   .bilibili-player-placeholder,
   .bilibili-player-placeholder-top {

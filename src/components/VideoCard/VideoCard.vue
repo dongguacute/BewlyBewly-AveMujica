@@ -272,6 +272,7 @@ provide('getVideoType', () => props.type!)
     intrinsic-size-300px
     duration-300 ease-in-out
     rounded="$bew-radius"
+    shadow="$bew-shadow-1"
     ring="hover:8 hover:$bew-fill-2 active:8 active:$bew-fill-3"
     bg="hover:$bew-fill-2 active:$bew-fill-3"
     transform="~ translate-z-0"
@@ -336,8 +337,11 @@ provide('getVideoType', () => props.type!)
                 ref="videoElement"
                 autoplay muted
                 :controls="settings.enableVideoCtrlBarOnVideoCard"
-                :style="{ pointerEvents: settings.enableVideoCtrlBarOnVideoCard ? 'auto' : 'none' }"
                 pos="absolute top-0 left-0" w-full aspect-video rounded="$bew-radius" bg-black
+                :style="{
+                  pointerEvents: settings.enableVideoCtrlBarOnVideoCard ? 'auto' : 'none',
+                  clipPath: 'inset(0 round var(--bew-radius))',
+                }"
                 @mouseenter="handleMouseEnter"
               >
                 <source :src="previewVideoUrl" type="video/mp4">
@@ -506,7 +510,7 @@ provide('getVideoType', () => props.type!)
                 <!-- View & Danmaku Count -->
                 <div
                   text="sm $bew-text-2" rounded="$bew-radius"
-                  inline-block
+                  inline-block shadow="$bew-shadow-1"
                 >
                   <span v-if="video.view || video.viewStr">
                     {{ video.view ? $t('common.view', { count: numFormatter(video.view) }, video.view) : `${numFormatter(video.viewStr || '0')}${$t('common.viewWithoutNum')}` }}
