@@ -13,14 +13,10 @@ html.rounded-video-player {
     transform: translateZ(0);
   }
 
-  // 祖先裁剪对合成视频图层的边缘不带抗锯齿，会沿圆角留下黑色硬边，
-  // 需要让 video 图层自身带同样的顶部圆角（自身的圆角裁剪带抗锯齿）
-  .bpx-player-container:not(:fullscreen):not([data-screen="full"]):not([data-screen="web"]):not(
-      [data-screen="mini"]
-    ):not(.v-recommend-inline-player *)
-    video {
-    border-radius: 12px 12px 0 0;
-  }
+  // 只在容器上做一次圆角裁剪（translateZ(0) 保证对合成视频图层的裁剪带抗锯齿）。
+  // 不要再给 video 加自身圆角：两次抗锯齿裁剪的弧线会因亚像素偏移错开，
+  // video 的半透明边缘混合到身后黑色背景上，圆角处会留下一圈脏边纹
+  // （YouTube 也只在容器上做一次裁剪）
 
   // 底部弹幕框与页面背景同色（浅色模式下圆角轮廓看不出来），加阴影增强轮廓
   .player-wrap {
