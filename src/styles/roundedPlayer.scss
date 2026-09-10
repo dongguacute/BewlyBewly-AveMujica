@@ -3,12 +3,23 @@ html.rounded-video-player {
   // 全屏、网页全屏和小窗预览播放器时保持直角，避免四角露底
   // 右侧相关视频卡片内的悬浮预览播放器（.v-recommend-inline-player）也保持直角
   .player-wrap,
-  .bilibili-player-placeholder,
   .bpx-player-container:not(:fullscreen):not([data-screen="full"]):not([data-screen="web"]):not(
       [data-screen="mini"]
     ):not(.v-recommend-inline-player *) {
     border-radius: 12px;
     overflow: hidden;
+    // Chromium 对合成视频图层做祖先圆角裁剪时，圆角处会残留黑色色块，
+    // 提升为独立渲染表面后裁剪才带抗锯齿
+    transform: translateZ(0);
+  }
+
+  // 祖先裁剪对合成视频图层的边缘不带抗锯齿，会沿圆角留下黑色硬边，
+  // 需要让 video 图层自身带同样的顶部圆角（自身的圆角裁剪带抗锯齿）
+  .bpx-player-container:not(:fullscreen):not([data-screen="full"]):not([data-screen="web"]):not(
+      [data-screen="mini"]
+    ):not(.v-recommend-inline-player *)
+    video {
+    border-radius: 12px 12px 0 0;
   }
 
   // 底部弹幕框与页面背景同色（浅色模式下圆角轮廓看不出来），加阴影增强轮廓
@@ -16,7 +27,11 @@ html.rounded-video-player {
     box-shadow: 0 4px 20px rgb(0 0 0 / 14%);
   }
 
-  // 占位层背景透明，否则圆角缺口处会露出它的白色方块角
+  // 占位层背景透明，否则圆角缺口处会露出它的方块角
+  // 注意 bilibili 用的是 ID 而非 class（#bilibili-player-placeholder*），
+  // 其 top 区是黑色背景、bottom 区是白色背景，黑底会在圆角缝隙处露出黑色描边
+  #bilibili-player-placeholder,
+  #bilibili-player-placeholder-top,
   .bilibili-player-placeholder,
   .bilibili-player-placeholder-top {
     background: transparent !important;
