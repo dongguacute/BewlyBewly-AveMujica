@@ -2,9 +2,6 @@
 html.rounded-video-player {
   // 全屏、网页全屏和小窗预览播放器时保持直角，避免四角露底
   // 右侧相关视频卡片内的悬浮预览播放器（.v-recommend-inline-player）也保持直角
-  // .player-wrap 还需排除网页全屏/宽屏/小窗：这些模式下播放器会脱离文档流铺满页面，
-  // wrap 若恒定带 transform 会成为 fixed 播放器的包含块，导致播放器无法铺满视口
-  .player-wrap:not(:has([data-screen="full"], [data-screen="web"], [data-screen="wide"], [data-screen="mini"])),
   .bpx-player-container:not(:fullscreen):not([data-screen="full"]):not([data-screen="web"]):not(
       [data-screen="mini"]
     ):not(.v-recommend-inline-player *) {
@@ -15,16 +12,41 @@ html.rounded-video-player {
     transform: translateZ(0);
   }
 
+  // .player-wrap 还需排除网页全屏/宽屏/小窗：这些模式下播放器会脱离文档流铺满页面，
+  // wrap 若恒定带 transform 会成为 fixed 播放器的包含块，导致播放器无法铺满视口。
+  // 注意 wrap 不能加 translateZ(0)：合成层会把自己的 box-shadow 连同圆角裁剪一起裁掉，
+  // 发光就没了；wrap 内需要裁剪的只有普通元素（占位层等），非合成裁剪自带抗锯齿
+  .player-wrap:not(:has([data-screen="full"], [data-screen="web"], [data-screen="wide"], [data-screen="mini"])) {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
   // 只在容器上做一次圆角裁剪（translateZ(0) 保证对合成视频图层的裁剪带抗锯齿）。
   // 不要再给 video 加自身圆角：两次抗锯齿裁剪的弧线会因亚像素偏移错开，
   // video 的半透明边缘混合到身后黑色背景上，圆角处会留下一圈脏边纹
   // （YouTube 也只在容器上做一次裁剪）
 
-  // 底部弹幕框与页面背景同色（浅色模式下圆角轮廓看不出来），加阴影增强轮廓
-  &.video-player-shadow {
+  // 原生发光：容器自带 0 0 8px var(--bpx-box-shadow) 的均匀阴影，但会被 wrap 的
+  // overflow:hidden 连同子元素一起裁掉，故在 wrap 上原样补回；再叠加下坠式阴影，
+  // 因为圆角裁剪后原生均匀阴影衬托不出圆角轮廓
+  .player-wrap:not(:has([data-screen="full"], [data-screen="web"], [data-screen="wide"], [data-screen="mini"])) {
+    box-shadow:
+      0 0 8px var(--bpx-box-shadow, #e5e9ef),
+      0 4px 20px rgb(0 0 0 / 14%);
+  }
+
+  // 深色模式下原生光晕（--bpx-box-shadow: #0a0b0c/rgba(0,0,0,.15)）与页面背景几乎同色，
+  // 黑色阴影失去对比，且圆角会把方角处集中的光晕能量摊薄。
+  // 用多层白柔光勾出边缘（近边缘一层较实、向外逐层衰减），既可见又不会像 1px 描边那样生硬
+  &.dark .player-wrap:not(:has([data-screen="full"], [data-screen="web"], [data-screen="wide"], [data-screen="mini"])),
+  &.bili_dark
     .player-wrap:not(:has([data-screen="full"], [data-screen="web"], [data-screen="wide"], [data-screen="mini"])) {
-      box-shadow: 0 4px 20px rgb(0 0 0 / 14%);
-    }
+    box-shadow:
+      0 0 8px rgb(0 0 0 / 50%),
+      0 4px 20px rgb(0 0 0 / 45%),
+      0 0 4px rgb(255 255 255 / 20%),
+      0 0 14px rgb(255 255 255 / 10%),
+      0 0 30px rgb(255 255 255 / 5%);
   }
 
   // 占位层背景透明，否则圆角缺口处会露出它的方块角
