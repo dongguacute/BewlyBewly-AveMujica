@@ -336,8 +336,11 @@ provide('getVideoType', () => props.type!)
                 ref="videoElement"
                 autoplay muted
                 :controls="settings.enableVideoCtrlBarOnVideoCard"
-                :style="{ pointerEvents: settings.enableVideoCtrlBarOnVideoCard ? 'auto' : 'none' }"
                 pos="absolute top-0 left-0" w-full aspect-video rounded="$bew-radius" bg-black
+                :style="{
+                  pointerEvents: settings.enableVideoCtrlBarOnVideoCard ? 'auto' : 'none',
+                  clipPath: 'inset(0 round var(--bew-radius))',
+                }"
                 @mouseenter="handleMouseEnter"
               >
                 <source :src="previewVideoUrl" type="video/mp4">

@@ -214,6 +214,8 @@ settings:
   style_auto_follow_bg: Auto
   style_force_enable: On
   style_force_disable: Off
+  rounded_video_player: Rounded corners for the video player
+  rounded_video_player_desc: Add YouTube-like rounded corners to the video player.
   legacy_player_loading_screen: Use legacy player loading screen (shaking small TV)
 
   # Search page

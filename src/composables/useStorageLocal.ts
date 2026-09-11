@@ -5,6 +5,8 @@ import { nextTick, ref, toValue, watch } from 'vue'
 import type { Storage } from 'webextension-polyfill'
 import { storage } from 'webextension-polyfill'
 
+import { isExtensionContextValid } from '~/utils/extensionContext'
+
 interface UseStorageLocalOptions {
   /** Merge the stored value with the default value (shallow) instead of replacing it. */
   mergeDefaults?: boolean
@@ -87,7 +89,8 @@ export function useStorageLocal<T>(
       }
     }
     catch (e) {
-      console.error(e)
+      if (isExtensionContextValid())
+        console.error(e)
     }
   }
 
@@ -119,11 +122,18 @@ export function useStorageLocal<T>(
   storage.onChanged.addListener(onStorageChanged)
 
   read().finally(() => {
-    watch(
+    const stopWatcher = watch(
       data,
       async (value) => {
         if (applyingExternalChange)
           return
+
+        // The extension was reloaded/updated and this old content script's runtime is dead;
+        // stop persisting instead of throwing `Extension context invalidated.` on every write
+        if (!isExtensionContextValid()) {
+          stopWatcher()
+          return
+        }
 
         try {
           if (value == null) {
@@ -137,7 +147,8 @@ export function useStorageLocal<T>(
           }
         }
         catch (e) {
-          console.error(e)
+          if (isExtensionContextValid())
+            console.error(e)
         }
       },
       { deep, flush: 'pre' },

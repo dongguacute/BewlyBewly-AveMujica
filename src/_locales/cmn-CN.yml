@@ -212,6 +212,8 @@ settings:
   style_auto_follow_bg: 自动
   style_force_enable: 开启
   style_force_disable: 关闭
+  rounded_video_player: 视频播放器圆角
+  rounded_video_player_desc: 为视频播放器添加类似 YouTube 的圆角。
   legacy_player_loading_screen: 使用旧版播放器加载画面（抖动小电视）
 
   # Search page

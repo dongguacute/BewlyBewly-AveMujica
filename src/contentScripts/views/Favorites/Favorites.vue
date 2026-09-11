@@ -118,8 +118,9 @@ async function getFavoriteResources(
       keyword,
     })
 
-    if (res.code === 0) {
-      activatedCategoryCover.value = res.data.info.cover
+    // bilibili returns data: null for an empty favorites folder
+    if (res.code === 0 && res.data) {
+      activatedCategoryCover.value = res.data.info?.cover
 
       if (Array.isArray(res.data.medias) && res.data.medias.length > 0)
         favoriteResources.push(...res.data.medias)

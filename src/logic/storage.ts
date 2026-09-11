@@ -71,6 +71,7 @@ export interface Settings {
   customizeCSSContent: string
 
   showVideoPageBackground: boolean
+  roundedVideoPlayer: boolean
   videoPageDanmakuStyle: 'auto' | 'on' | 'off'
   videoPageVideoPodStyle: 'auto' | 'on' | 'off'
 
@@ -188,6 +189,7 @@ export const originalSettings: Settings = {
   customizeCSSContent: '',
 
   showVideoPageBackground: false,
+  roundedVideoPlayer: false,
   videoPageDanmakuStyle: 'off',
   videoPageVideoPodStyle: 'off',
 
