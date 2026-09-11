@@ -2,7 +2,9 @@
 html.rounded-video-player {
   // 全屏、网页全屏和小窗预览播放器时保持直角，避免四角露底
   // 右侧相关视频卡片内的悬浮预览播放器（.v-recommend-inline-player）也保持直角
-  .player-wrap,
+  // .player-wrap 还需排除网页全屏/宽屏/小窗：这些模式下播放器会脱离文档流铺满页面，
+  // wrap 若恒定带 transform 会成为 fixed 播放器的包含块，导致播放器无法铺满视口
+  .player-wrap:not(:has([data-screen="full"], [data-screen="web"], [data-screen="wide"], [data-screen="mini"])),
   .bpx-player-container:not(:fullscreen):not([data-screen="full"]):not([data-screen="web"]):not(
       [data-screen="mini"]
     ):not(.v-recommend-inline-player *) {
@@ -19,7 +21,7 @@ html.rounded-video-player {
   // （YouTube 也只在容器上做一次裁剪）
 
   // 底部弹幕框与页面背景同色（浅色模式下圆角轮廓看不出来），加阴影增强轮廓
-  .player-wrap {
+  .player-wrap:not(:has([data-screen="full"], [data-screen="web"], [data-screen="wide"], [data-screen="mini"])) {
     box-shadow: 0 4px 20px rgb(0 0 0 / 14%);
   }
 
