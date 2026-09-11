@@ -72,6 +72,7 @@ export interface Settings {
 
   showVideoPageBackground: boolean
   roundedVideoPlayer: boolean
+  videoPlayerShadow: boolean
   videoPageDanmakuStyle: 'auto' | 'on' | 'off'
   videoPageVideoPodStyle: 'auto' | 'on' | 'off'
 
@@ -190,6 +191,7 @@ export const originalSettings: Settings = {
 
   showVideoPageBackground: false,
   roundedVideoPlayer: false,
+  videoPlayerShadow: true,
   videoPageDanmakuStyle: 'off',
   videoPageVideoPodStyle: 'off',
 

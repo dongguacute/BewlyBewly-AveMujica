@@ -216,6 +216,8 @@ settings:
   style_force_disable: Off
   rounded_video_player: Rounded corners for the video player
   rounded_video_player_desc: Add YouTube-like rounded corners to the video player.
+  video_player_shadow: Video player shadow
+  video_player_shadow_desc: Add a shadow to the rounded video player to enhance its outline
   legacy_player_loading_screen: Use legacy player loading screen (shaking small TV)
 
   # Search page

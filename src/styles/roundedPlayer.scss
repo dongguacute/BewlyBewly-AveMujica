@@ -21,8 +21,10 @@ html.rounded-video-player {
   // （YouTube 也只在容器上做一次裁剪）
 
   // 底部弹幕框与页面背景同色（浅色模式下圆角轮廓看不出来），加阴影增强轮廓
-  .player-wrap:not(:has([data-screen="full"], [data-screen="web"], [data-screen="wide"], [data-screen="mini"])) {
-    box-shadow: 0 4px 20px rgb(0 0 0 / 14%);
+  &.video-player-shadow {
+    .player-wrap:not(:has([data-screen="full"], [data-screen="web"], [data-screen="wide"], [data-screen="mini"])) {
+      box-shadow: 0 4px 20px rgb(0 0 0 / 14%);
+    }
   }
 
   // 占位层背景透明，否则圆角缺口处会露出它的方块角

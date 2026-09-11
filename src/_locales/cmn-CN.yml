@@ -214,6 +214,8 @@ settings:
   style_force_disable: 关闭
   rounded_video_player: 视频播放器圆角
   rounded_video_player_desc: 为视频播放器添加类似 YouTube 的圆角。
+  video_player_shadow: 视频播放器阴影
+  video_player_shadow_desc: 为圆角视频播放器添加阴影，增强轮廓
   legacy_player_loading_screen: 使用旧版播放器加载画面（抖动小电视）
 
   # Search page

@@ -96,6 +96,15 @@ watch(() => settings.value.legacyPlayerLoadingScreen, () => {
         <Radio v-model="settings.roundedVideoPlayer" />
       </SettingsItem>
 
+      <!-- 控制视频播放器阴影的开关，仅在开启圆角播放器时显示 -->
+      <SettingsItem
+        v-if="settings.roundedVideoPlayer"
+        :title="$t('settings.video_player_shadow')"
+        :desc="$t('settings.video_player_shadow_desc')"
+      >
+        <Radio v-model="settings.videoPlayerShadow" />
+      </SettingsItem>
+
       <SettingsItem :title="$t('settings.legacy_player_loading_screen')">
         <Radio v-model="settings.legacyPlayerLoadingScreen" />
       </SettingsItem>

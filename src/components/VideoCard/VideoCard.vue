@@ -272,7 +272,6 @@ provide('getVideoType', () => props.type!)
     intrinsic-size-300px
     duration-300 ease-in-out
     rounded="$bew-radius"
-    shadow="$bew-shadow-1"
     ring="hover:8 hover:$bew-fill-2 active:8 active:$bew-fill-3"
     bg="hover:$bew-fill-2 active:$bew-fill-3"
     transform="~ translate-z-0"
@@ -510,7 +509,7 @@ provide('getVideoType', () => props.type!)
                 <!-- View & Danmaku Count -->
                 <div
                   text="sm $bew-text-2" rounded="$bew-radius"
-                  inline-block shadow="$bew-shadow-1"
+                  inline-block
                 >
                   <span v-if="video.view || video.viewStr">
                     {{ video.view ? $t('common.view', { count: numFormatter(video.view) }, video.view) : `${numFormatter(video.viewStr || '0')}${$t('common.viewWithoutNum')}` }}

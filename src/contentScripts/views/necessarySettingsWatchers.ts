@@ -330,4 +330,12 @@ export function setupNecessarySettingsWatchers() {
     },
     { immediate: true },
   )
+
+  watch(
+    () => settings.value.videoPlayerShadow,
+    () => {
+      document.documentElement.classList.toggle('video-player-shadow', settings.value.videoPlayerShadow)
+    },
+    { immediate: true },
+  )
 }
